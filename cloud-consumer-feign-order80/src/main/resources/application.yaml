@@ -1,0 +1,28 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    #表示是否向注册中心注册自己
+    register-with-eureka: false
+    #是否从eurekaservice抓取已有的注册信息 默认为true 单节点无所谓，集群必须使用true才能配合ribbon使用负载均衡
+    fetch-registry: true
+    #（入住）注册的地址
+    service-url:
+      #defaultZone: http://localhost:7001/eureka
+      defaultZone: http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/  #集群版
+
+#设置feign客服端超时时间（openfein默认支持ribbon）
+ribbon:
+  #指的是建立连接所用的时间，适用于网络状态1正常的情况下，两端连接所用的时间
+  ReadTimeout: 5000
+  #指的是建立连接后从服务器读到可用资源的时间
+  ConnectTimeout: 5000
+logging:
+  level:
+    #feign日志以什么级别监控哪个接口
+   com.atguigu.springcloud.service.PaymentFeignService: debug
+
+
+
+
